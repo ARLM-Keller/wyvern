@@ -1,0 +1,10 @@
+C:\Users\Administrator\Documents\Visual Studio 2008\Projects\LinqXML\LinqXML\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Administrator\Documents\Visual Studio 2008\Projects\LinqXML\LinqXML\obj\Debug\LinqXML.Form1.resources
+C:\Users\Administrator\Documents\Visual Studio 2008\Projects\LinqXML\LinqXML\obj\Debug\LinqXML.Properties.Resources.resources
+C:\Users\Administrator\Documents\Visual Studio 2008\Projects\LinqXML\LinqXML\obj\Debug\LinqXML.csproj.GenerateResource.Cache
+C:\Users\Administrator\Documents\Visual Studio 2008\Projects\LinqXML\LinqXML\bin\Debug\LinqXML.exe
+C:\Users\Administrator\Documents\Visual Studio 2008\Projects\LinqXML\LinqXML\bin\Debug\LinqXML.pdb
+C:\Users\Administrator\Documents\Visual Studio 2008\Projects\LinqXML\LinqXML\obj\Debug\LinqXML.exe
+C:\Users\Administrator\Documents\Visual Studio 2008\Projects\LinqXML\LinqXML\obj\Debug\LinqXML.pdb
+D:\Projects\LinqXML\LinqXML\obj\Debug\LinqXML.exe
+D:\Projects\LinqXML\LinqXML\obj\Debug\LinqXML.pdb

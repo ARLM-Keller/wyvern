@@ -1,0 +1,8 @@
+D:\Projects\DuideFile\DuideFile\bin\Debug\DuideFile.exe
+D:\Projects\DuideFile\DuideFile\bin\Debug\DuideFile.pdb
+D:\Projects\DuideFile\DuideFile\obj\Debug\ResolveAssemblyReference.cache
+D:\Projects\DuideFile\DuideFile\obj\Debug\DuideFile.Form1.resources
+D:\Projects\DuideFile\DuideFile\obj\Debug\DuideFile.Properties.Resources.resources
+D:\Projects\DuideFile\DuideFile\obj\Debug\DuideFile.csproj.GenerateResource.Cache
+D:\Projects\DuideFile\DuideFile\obj\Debug\DuideFile.exe
+D:\Projects\DuideFile\DuideFile\obj\Debug\DuideFile.pdb

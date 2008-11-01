@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="CSDemo">
+</Property><Property Name="Solution File" Value="C:\Users\Wyvern\Documents\Visual Studio 2008\Projects\CSDemo\CSDemo.sln">
+</Property><Property Name="Date" Value="2007年9月4日">
+</Property><Property Name="Time" Value="16:01">
+</Property></Properties><Event ErrorLevel="0" Project="Client" Source="Client.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Client" Source="Client.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="CSDemo.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="CSDemo.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Client" Source="Client.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

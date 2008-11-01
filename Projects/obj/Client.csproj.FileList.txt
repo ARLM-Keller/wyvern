@@ -1,5 +1,0 @@
-obj\Debug\ResolveAssemblyReference.cache
-obj\Debug\QS.exe
-obj\Debug\QS.pdb
-bin\Debug\QS.exe
-bin\Debug\QS.pdb

@@ -1,0 +1,10 @@
+D:\Projects\DuideHeels\DuideFile\bin\Release\DuideHeels.exe.config
+D:\Projects\DuideHeels\DuideFile\bin\Release\DuideHeels.exe
+D:\Projects\DuideHeels\DuideFile\bin\Release\DuideHeels.pdb
+D:\Projects\DuideHeels\DuideFile\obj\Release\ResolveAssemblyReference.cache
+D:\Projects\DuideHeels\DuideFile\obj\Release\DuideHeels.BatchAction.resources
+D:\Projects\DuideHeels\DuideFile\obj\Release\DuideHeels.Ripper.resources
+D:\Projects\DuideHeels\DuideFile\obj\Release\DuideHeels.Properties.Resources.resources
+D:\Projects\DuideHeels\DuideFile\obj\Release\DuideHeels.csproj.GenerateResource.Cache
+D:\Projects\DuideHeels\DuideFile\obj\Release\DuideHeels.exe
+D:\Projects\DuideHeels\DuideFile\obj\Release\DuideHeels.pdb

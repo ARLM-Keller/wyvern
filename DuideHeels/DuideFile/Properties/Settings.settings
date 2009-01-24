@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ImageRipper.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="txtParse" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://www.heels.cn/web/viewthread?thread=</Value>
+    </Setting>
+    <Setting Name="txtDir" Type="System.String" Scope="User">
+      <Value Profile="(Default)">F:\Multimedia\Image</Value>
+    </Setting>
+    <Setting Name="CookieContent" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+  </Settings>
+</SettingsFile>

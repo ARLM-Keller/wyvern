@@ -1,8 +1,0 @@
-D:\Projects\DuideFile\DuideFile\bin\Release\DuideFile.exe
-D:\Projects\DuideFile\DuideFile\bin\Release\DuideFile.pdb
-D:\Projects\DuideFile\DuideFile\obj\Release\ResolveAssemblyReference.cache
-D:\Projects\DuideFile\DuideFile\obj\Release\DuideFile.Form1.resources
-D:\Projects\DuideFile\DuideFile\obj\Release\DuideFile.Properties.Resources.resources
-D:\Projects\DuideFile\DuideFile\obj\Release\DuideFile.csproj.GenerateResource.Cache
-D:\Projects\DuideFile\DuideFile\obj\Release\DuideFile.exe
-D:\Projects\DuideFile\DuideFile\obj\Release\DuideFile.pdb

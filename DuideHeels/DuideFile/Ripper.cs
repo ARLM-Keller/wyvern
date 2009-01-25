@@ -142,7 +142,7 @@ namespace DuideHeels
         public string Dir
         {
             get { return localDir.Text.Trim(); }
-            set { localDir.Text = value; }
+            set { localDir.Text = value ?? string.Empty; }
         }
 
         public Uri Url
@@ -154,7 +154,7 @@ namespace DuideHeels
         public string Cookie
         {
             get { return tbContent.Text.Trim(); }
-            set { tbContent.Text = value; }
+            set { tbContent.Text = value ?? string.Empty; }
         }
 
         private void DownloadCancel_Click(object sender, EventArgs e)
@@ -870,7 +870,6 @@ namespace DuideHeels
                     if (splitContainer1.Panel2Collapsed) splitContainer1.Panel2Collapsed = false;
                     dl.ImageLocation = pictureBox1.ImageLocation = file;
                 }
-                Clipboard.SetText(listView1.FocusedItem.Tag as string);
             }
         }
 
@@ -995,12 +994,18 @@ namespace DuideHeels
 
         private void listView1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Delete)
+            switch (e.KeyCode)
             {
-                if (e.Shift)
-                    cmmiDeleteAll_Click(sender, e);
-                else
-                    cmmiDeleteFile(sender, e);
+                case Keys.Delete:
+                    if (e.Shift)
+                        cmmiDeleteAll_Click(sender, e);
+                    else
+                        cmmiDeleteFile(sender, e);
+                    break;
+                case Keys.C:
+                    if (e.Control && listView1.FocusedItem != null)
+                        Clipboard.SetText(listView1.FocusedItem.Tag as string);
+                    break;
             }
         }
 

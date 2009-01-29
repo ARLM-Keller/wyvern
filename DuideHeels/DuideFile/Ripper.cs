@@ -1017,12 +1017,20 @@ namespace DuideHeels
                     if (this.FormBorderStyle != FormBorderStyle.None)
                     {
                         this.FormBorderStyle = FormBorderStyle.None;
-                        this.WindowState = FormWindowState.Maximized;
+                        this.Tag = WindowState;
+                        if (this.WindowState != FormWindowState.Maximized)
+                            this.WindowState = FormWindowState.Maximized;
+                        else
+                        {
+                            this.Hide();
+                            this.Show();
+                        }
                     }
                     else
                     {
-                        this.WindowState = FormWindowState.Normal;
+                        
                         this.FormBorderStyle = FormBorderStyle.Sizable;
+                        this.WindowState = (FormWindowState)this.Tag;
                     }
                     break;
             }

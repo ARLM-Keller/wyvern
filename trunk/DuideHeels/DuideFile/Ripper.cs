@@ -1006,8 +1006,26 @@ namespace DuideHeels
                     if (e.Control && listView1.FocusedItem != null)
                         Clipboard.SetText(listView1.FocusedItem.Tag as string);
                     break;
+                case Keys.Escape:
+                    if (FormBorderStyle == FormBorderStyle.None)
+                    {
+                        this.WindowState = FormWindowState.Normal;
+                        this.FormBorderStyle = FormBorderStyle.Sizable;
+                    } 
+                    break;
+                case Keys.F11:
+                    if (this.FormBorderStyle != FormBorderStyle.None)
+                    {
+                        this.FormBorderStyle = FormBorderStyle.None;
+                        this.WindowState = FormWindowState.Maximized;
+                    }
+                    else
+                    {
+                        this.WindowState = FormWindowState.Normal;
+                        this.FormBorderStyle = FormBorderStyle.Sizable;
+                    }
+                    break;
             }
         }
-
     }
 }

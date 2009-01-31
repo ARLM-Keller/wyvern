@@ -1028,7 +1028,8 @@ namespace DuideHeels
 
         void ToFullScreen()
         {
-            WindowState = FormWindowState.Normal;
+            if (WindowState == FormWindowState.Maximized)
+                WindowState = FormWindowState.Normal;
             this.Tag = Bounds;
             FormBorderStyle = FormBorderStyle.None;
             Bounds = Screen.PrimaryScreen.Bounds;

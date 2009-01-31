@@ -1022,8 +1022,8 @@ namespace DuideHeels
                             this.WindowState = FormWindowState.Maximized;
                         else
                         {
-                            this.Hide();
-                            this.Show();
+                            this.Visible = false;
+                            this.Visible = true;
                         }
                     }
                     else

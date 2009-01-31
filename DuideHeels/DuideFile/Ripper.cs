@@ -1006,8 +1006,17 @@ namespace DuideHeels
                     if (e.Control && listView1.FocusedItem != null)
                         Clipboard.SetText(listView1.FocusedItem.Tag as string);
                     break;
+            }
+        }
+
+        public bool FullScreen { get; set; }
+
+        private void Ripper_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
                 case Keys.Escape:
-                    if (FormBorderStyle==FormBorderStyle.None)
+                    if (FormBorderStyle == FormBorderStyle.None)
                     {
                         FullScreen = false;
                         FormBorderStyle = FormBorderStyle.Sizable;
@@ -1021,20 +1030,17 @@ namespace DuideHeels
                         FormBorderStyle = FormBorderStyle.Sizable;
                         Bounds = (Rectangle)this.Tag;
                     }
-                    else ToFullScreen();
+                    else 
+                    {
+                        if (WindowState == FormWindowState.Maximized)
+                            WindowState = FormWindowState.Normal;
+                        this.Tag = Bounds;
+                        FormBorderStyle = FormBorderStyle.None;
+                        Bounds = Screen.PrimaryScreen.Bounds;
+                        FullScreen = true;
+                    }
                     break;
             }
         }
-
-        void ToFullScreen()
-        {
-            if (WindowState == FormWindowState.Maximized)
-                WindowState = FormWindowState.Normal;
-            this.Tag = Bounds;
-            FormBorderStyle = FormBorderStyle.None;
-            Bounds = Screen.PrimaryScreen.Bounds;
-            FullScreen = true;
-        }
-        public bool FullScreen { get; set; }
     }
 }

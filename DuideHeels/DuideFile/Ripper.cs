@@ -1007,33 +1007,33 @@ namespace DuideHeels
                         Clipboard.SetText(listView1.FocusedItem.Tag as string);
                     break;
                 case Keys.Escape:
-                    if (FormBorderStyle == FormBorderStyle.None)
+                    if (FormBorderStyle==FormBorderStyle.None)
                     {
-                        this.WindowState = FormWindowState.Normal;
-                        this.FormBorderStyle = FormBorderStyle.Sizable;
-                    } 
+                        FullScreen = false;
+                        FormBorderStyle = FormBorderStyle.Sizable;
+                        Bounds = (Rectangle)this.Tag;
+                    }
                     break;
                 case Keys.F11:
-                    if (this.FormBorderStyle != FormBorderStyle.None)
+                    if (FullScreen)
                     {
-                        this.FormBorderStyle = FormBorderStyle.None;
-                        this.Tag = WindowState;
-                        if (this.WindowState != FormWindowState.Maximized)
-                            this.WindowState = FormWindowState.Maximized;
-                        else
-                        {
-                            this.Visible = false;
-                            this.Visible = true;
-                        }
+                        FullScreen = false;
+                        FormBorderStyle = FormBorderStyle.Sizable;
+                        Bounds = (Rectangle)this.Tag;
                     }
-                    else
-                    {
-                        
-                        this.FormBorderStyle = FormBorderStyle.Sizable;
-                        this.WindowState = (FormWindowState)this.Tag;
-                    }
+                    else ToFullScreen();
                     break;
             }
         }
+
+        void ToFullScreen()
+        {
+            WindowState = FormWindowState.Normal;
+            this.Tag = Bounds;
+            FormBorderStyle = FormBorderStyle.None;
+            Bounds = Screen.PrimaryScreen.Bounds;
+            FullScreen = true;
+        }
+        public bool FullScreen { get; set; }
     }
 }

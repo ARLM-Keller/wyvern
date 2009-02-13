@@ -2,17 +2,14 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Text;
 using System.IO;
-using System.Media;
 using System.Net;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using System.Web.Security;
 
-using HTMLParser;
 using DuideHeels.Properties;
+using HTMLParser;
 using HtmlDocument = HTMLParser.HtmlDocument;
 using HtmlElement = HTMLParser.HtmlElement;
 
@@ -1009,7 +1006,7 @@ namespace DuideHeels
             }
         }
 
-        public bool FullScreen { get; set; }
+        public bool _FullScreen = false;
 
         private void Ripper_KeyDown(object sender, KeyEventArgs e)
         {
@@ -1018,15 +1015,15 @@ namespace DuideHeels
                 case Keys.Escape:
                     if (FormBorderStyle == FormBorderStyle.None)
                     {
-                        FullScreen = false;
+                        _FullScreen = false;
                         FormBorderStyle = FormBorderStyle.Sizable;
                         Bounds = (Rectangle)this.Tag;
                     }
                     break;
                 case Keys.F11:
-                    if (FullScreen)
+                    if (_FullScreen)
                     {
-                        FullScreen = false;
+                        _FullScreen = false;
                         FormBorderStyle = FormBorderStyle.Sizable;
                         Bounds = (Rectangle)this.Tag;
                     }
@@ -1037,7 +1034,7 @@ namespace DuideHeels
                         this.Tag = Bounds;
                         FormBorderStyle = FormBorderStyle.None;
                         Bounds = Screen.PrimaryScreen.Bounds;
-                        FullScreen = true;
+                        _FullScreen = true;
                     }
                     break;
             }

@@ -819,7 +819,7 @@ namespace DuideHeels
 
         private void cmmiDelete_Click(object sender, EventArgs e)
         {
-            if (dl.ImageLocation != null && File.Exists(dl.ImageLocation))
+            if (File.Exists(dl.ImageLocation))
             {
                 File.Delete(dl.ImageLocation);
                 FileInfo fi = new FileInfo(dl.ImageLocation);
@@ -836,7 +836,7 @@ namespace DuideHeels
 
         private void cmmiDeleteAll_Click(object sender, EventArgs e)
         {
-            if (dl != null && dl.Imgs != null && dl.Imgs.Count > 0)
+            if (dl.Imgs != null && dl.Imgs.Count > 0)
             {
                 foreach (string name in dl.Imgs.AllKeys)
                 {
@@ -927,6 +927,7 @@ namespace DuideHeels
             lock (downloading)
             {
                 DownloadFileArgs dfa = args as DownloadFileArgs;
+                Debug.Assert(dfa != null);
                 try
                 {
                     if (dl.PS == ParseStyle.Heels)
@@ -1006,7 +1007,7 @@ namespace DuideHeels
             }
         }
 
-        public bool _FullScreen = false;
+        bool _FullScreen = false;
 
         private void Ripper_KeyDown(object sender, KeyEventArgs e)
         {
@@ -1031,6 +1032,7 @@ namespace DuideHeels
                     {
                         if (WindowState == FormWindowState.Maximized)
                             WindowState = FormWindowState.Normal;
+                        
                         this.Tag = Bounds;
                         FormBorderStyle = FormBorderStyle.None;
                         Bounds = Screen.PrimaryScreen.Bounds;

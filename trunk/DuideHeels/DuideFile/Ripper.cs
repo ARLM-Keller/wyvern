@@ -20,6 +20,7 @@ namespace DuideHeels
         private Action ActivePictureBox;
         private Action EnableListViewContextMenu;
         private Action EnablePictureBoxContextMenu;
+        private Func<string,ListViewItem> lvFindItem;
         
         /// <summary>
         /// Show statusprogressbar
@@ -131,6 +132,7 @@ namespace DuideHeels
             {
                 splitContainer1.Panel2Collapsed = false;
             };
+            lvFindItem = (itemtext) => { return listView1.FindItemWithText(itemtext); };
         }
 
         public int From { get; set; }
@@ -329,8 +331,7 @@ namespace DuideHeels
                     var ck = new Cookie("JSESSIONID", Cookie, "/", "www.heels.cn");
                     UpdateStatus();
                     listView1.Invoke(EnableListViewContextMenu);
-                    HttpWebRequest req;
-                    Bitmap bmp;
+                    
                     for (int index = dl.Finished; index < dl.Imgs.Count; index++)
                     {
                         if (dl.Canceled)
@@ -350,7 +351,7 @@ namespace DuideHeels
                         dl.Current = fi;
                         if (fi.Exists)
                         {
-                            if (listView1.FindItemWithText(fi.Name) == null)
+                            if ((listView1.Invoke(lvFindItem, fi.Name) as ListViewItem) == null)
                             {
                                 lviFile = new ListViewItem(new string[] 
                                 { 
@@ -369,10 +370,12 @@ namespace DuideHeels
                             continue;
                         }
                         if (splitContainer1.Panel2Collapsed) splitContainer1.Invoke(ActivePictureBox);
-                        req = (HttpWebRequest) WebRequest.Create(header + dl.Imgs[index]);
+
+                        HttpWebRequest req= (HttpWebRequest)WebRequest.Create(header + dl.Imgs[index]);
                         req.CookieContainer = new CookieContainer();
                         req.CookieContainer.Add(ck);
-                        if (listView1.FindItemWithText(fi.Name)==null)
+
+                        if ((listView1.Invoke(lvFindItem, fi.Name) as ListViewItem) == null)
                         {
                             lviFile = new ListViewItem(new string[] 
                             { 
@@ -387,6 +390,9 @@ namespace DuideHeels
                         }
                         else
                             listView1.Invoke(ulvi, fi.Name, string.Empty, string.Empty, "Try again");
+
+                        Bitmap bmp;
+                        
                         try
                         {
                             
@@ -1032,7 +1038,6 @@ namespace DuideHeels
                     {
                         if (WindowState == FormWindowState.Maximized)
                             WindowState = FormWindowState.Normal;
-                        
                         this.Tag = Bounds;
                         FormBorderStyle = FormBorderStyle.None;
                         Bounds = Screen.PrimaryScreen.Bounds;

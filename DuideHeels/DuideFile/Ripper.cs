@@ -132,7 +132,8 @@ namespace DuideHeels
             {
                 splitContainer1.Panel2Collapsed = false;
             };
-            lvFindItem = (itemtext) => { return listView1.FindItemWithText(itemtext); };
+
+            lvFindItem = (itemtext) => listView1.FindItemWithText(itemtext);
         }
 
         public int From { get; set; }
@@ -351,7 +352,7 @@ namespace DuideHeels
                         dl.Current = fi;
                         if (fi.Exists)
                         {
-                            if ((listView1.Invoke(lvFindItem, fi.Name) as ListViewItem) == null)
+                            if (listView1.Invoke(lvFindItem, fi.Name) == null)
                             {
                                 lviFile = new ListViewItem(new string[] 
                                 { 
@@ -375,7 +376,7 @@ namespace DuideHeels
                         req.CookieContainer = new CookieContainer();
                         req.CookieContainer.Add(ck);
 
-                        if ((listView1.Invoke(lvFindItem, fi.Name) as ListViewItem) == null)
+                        if (listView1.Invoke(lvFindItem, fi.Name) == null)
                         {
                             lviFile = new ListViewItem(new string[] 
                             { 

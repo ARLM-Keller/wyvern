@@ -1,0 +1,48 @@
+import "docobj.idl";
+
+[
+	dual,
+	uuid(00000000-0000-0000-0000-000000000001)
+] 
+#line 5 "c:\\users\\wyvern\\documents\\visual studio 2008\\projects\\demo\\demo\\evh_server.h"
+interface IEvents : IDispatch {
+	[id(1)] HRESULT  MyEvent([in] int value);
+};
+
+[
+	dual,
+	uuid(00000000-0000-0000-0000-000000000002)
+] 
+#line 10 "c:\\users\\wyvern\\documents\\visual studio 2008\\projects\\demo\\demo\\evh_server.h"
+interface IEventSource : IDispatch {
+	[id(1)] HRESULT  FireEvent();
+};
+
+
+[ version(1.0), uuid(46b41434-f157-3f18-bd90-25dff245cbff) ]
+library EventReceiver
+{
+	importlib("stdole2.tlb");
+	importlib("olepro32.dll");
+
+	[
+		uuid(5F05EAEA-6B73-3EB0-9E54-97ADC8C97028),
+		version(1.0),
+		noncreatable
+	] 
+	coclass __Impl_IEvents {
+		interface IEvents;
+	};
+
+	[
+		version(1.0),
+		uuid(530DF3AD-6936-3214-A83B-27B63C7997C4)
+	] 
+#line 12 "c:\\users\\wyvern\\documents\\visual studio 2008\\projects\\demo\\demo\\evh_server.cpp"
+	coclass CComSource {
+		interface IEventSource;
+		[default, source]	interface IEvents;
+	};
+
+}
+

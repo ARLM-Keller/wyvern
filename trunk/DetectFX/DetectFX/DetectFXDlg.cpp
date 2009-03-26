@@ -217,16 +217,15 @@ void CDetectFXDlg::OnClear()
 	m_lbFX.SendMessage(LB_RESETCONTENT);
 }
 
-void CDetectFXDlg::OnContextMenu(CWnd* /*pWnd*/, CPoint point)
+void CDetectFXDlg::OnContextMenu(CWnd* pWnd, CPoint point)
 {
 	CRect rect;
 	m_lbFX.GetWindowRect(&rect);
 	if(rect.PtInRect(point))
 	{
 		HMENU hMenu=GetSubMenu(LoadMenu(NULL,MAKEINTRESOURCE(IDR_LBCM)),0);
-		TRACE(MAKEINTRESOURCE(IDR_LBCM));
 		ASSERT(hMenu!=NULL);
-		TrackPopupMenu(hMenu,TPM_CENTERALIGN,point.x,point.y,0,this->m_hWnd,rect);
+		TrackPopupMenu(hMenu,TPM_CENTERALIGN,point.x,point.y,0,this->GetSafeHwnd(),rect);
 		DestroyMenu(hMenu);
 	}
 }

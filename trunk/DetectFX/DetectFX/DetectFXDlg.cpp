@@ -219,16 +219,14 @@ void CDetectFXDlg::OnClear()
 
 void CDetectFXDlg::OnContextMenu(CWnd* /*pWnd*/, CPoint point)
 {
-	CMenu lbcontextmenu;
-	ASSERT(lbcontextmenu.LoadMenu(IDR_LBCM));
-	
 	CRect rect;
 	m_lbFX.GetWindowRect(&rect);
 	if(rect.PtInRect(point))
 	{
-		CMenu* pmenu=lbcontextmenu.GetSubMenu(0);
-		ASSERT_VALID(pmenu);
-		pmenu->TrackPopupMenu(TPM_CENTERALIGN,point.x,point.y,this);
+		HMENU hMenu=GetSubMenu(LoadMenu(NULL,MAKEINTRESOURCE(IDR_LBCM)),0);
+		TRACE(MAKEINTRESOURCE(IDR_LBCM));
+		ASSERT(hMenu!=NULL);
+		TrackPopupMenu(hMenu,TPM_CENTERALIGN,point.x,point.y,0,this->m_hWnd,rect);
+		DestroyMenu(hMenu);
 	}
-	lbcontextmenu.DestroyMenu();
 }

@@ -46,10 +46,12 @@ BOOL CDetectFXDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 
 	// TODO: Add extra initialization here
-
+	
 	CFont lbfont;
-	VERIFY(lbfont.CreateFont(0,0,0,0,FW_BOLD,false,false,0,ANSI_CHARSET,OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,DEFAULT_QUALITY,DEFAULT_GUI_FONT|FF_MODERN,_T("Courier New")));
+	lbfont.CreateFont(22,18,0,0,FW_EXTRABOLD,FALSE,FALSE,FALSE,ANSI_CHARSET,                        OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,DEFAULT_QUALITY, DEFAULT_PITCH,_T("Consolas"));
 	m_lbFX.SetFont(&lbfont);
+	lbfont.DeleteObject();
+
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
 

@@ -28,7 +28,7 @@ BEGIN_MESSAGE_MAP(CDetectFXDlg, CDialog)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	//}}AFX_MSG_MAP
-	ON_BN_CLICKED(IDOK, &CDetectFXDlg::OnBnClickedOk)
+	ON_BN_CLICKED(IDDetect, &CDetectFXDlg::OnBnClickedDetect)
 	ON_COMMAND(ID_CMMENU_CLEAR, &CDetectFXDlg::OnClear)
 	ON_WM_CONTEXTMENU()
 END_MESSAGE_MAP()
@@ -94,7 +94,7 @@ HCURSOR CDetectFXDlg::OnQueryDragIcon()
 
 #include "F:\\Code\\Snippet\detect.h"
 
-void CDetectFXDlg::OnBnClickedOk()
+void CDetectFXDlg::OnBnClickedDetect()
 {
 	// TODO: Add your control notification handler code here
 	m_lbFX.SendMessage(LB_RESETCONTENT);

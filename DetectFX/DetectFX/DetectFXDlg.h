@@ -30,7 +30,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 	CListBox m_lbFX;
 public:
-	afx_msg void OnBnClickedOk();
+	afx_msg void OnBnClickedDetect();
 	afx_msg void OnClear();
 	afx_msg void OnContextMenu(CWnd* /*pWnd*/, CPoint /*point*/);
 };

@@ -216,14 +216,15 @@ int main(int argc, char** argv, char** envp) {
 	StringFromCLSID(__uuidof(CSource), &idstr);
 	USES_CONVERSION;
 	cout<<OLE2CA(idstr)<<endl;
-	vector<int> v(10);
+	vector<int> ai(10);
 	srand(GetTickCount());
-	generate(v.begin(), v.end(), rand);
-	copy(v.begin(), v.end(),
-		ostream_iterator<int>(cout,"\t"));
-	sort(v.begin(), v.end());
-	cout<<"After sort this array..."<<endl;
-	copy(v.begin(),v.end(),ostream_iterator<int>(cout," "));
+	generate(ai.begin(), ai.end(), rand);
+	cout<<"Unordered array..."<<endl;
+	copy(ai.begin(), ai.end(),
+		ostream_iterator<int>(cout," "));
+	sort(ai.begin(), ai.end());
+	cout<<"\nOrdered array..."<<endl;
+	copy(ai.begin(),ai.end(),ostream_iterator<int>(cout," "));
 	cout<<endl;
 
 #ifdef Demo

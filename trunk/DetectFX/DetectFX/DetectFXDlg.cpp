@@ -48,10 +48,10 @@ BOOL CDetectFXDlg::OnInitDialog()
 	// TODO: Add extra initialization here
 	
 	CFont lbfont;
-	lbfont.CreateFont(22,18,0,0,FW_EXTRABOLD,FALSE,FALSE,FALSE,ANSI_CHARSET,                        OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,DEFAULT_QUALITY, DEFAULT_PITCH,_T("Consolas"));
+	lbfont.CreateFont(22,27,0,0,FW_EXTRABOLD,FALSE,FALSE,FALSE,ANSI_CHARSET,                        OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,DEFAULT_QUALITY, DEFAULT_PITCH,_T("Consolas"));
 	m_lbFX.SetFont(&lbfont);
 	lbfont.DeleteObject();
-
+	
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
 

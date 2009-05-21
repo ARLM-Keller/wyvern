@@ -4,6 +4,7 @@
 // evh_native.cpp
 #include <stdio.h>
 #include <iostream>
+#include <ostream>
 #include <vector>
 #include <string>
 #include <algorithm>
@@ -15,8 +16,8 @@ using namespace std;
 //[event_source(native)]	
 struct __declspec(uuid("43d7ce4a-fbcf-454b-89de-1378b1a9d1d3")) CSource {
 public:
-	virtual __event void MyEvent(int nValue);
-	static __event void SEvent(int nValue);
+	void __event MyEvent(int nValue);
+	static void __event SEvent(int nValue);
 	__declspec(property (get=get_ip, put=put_ip)) int IP;
 	int get_ip()
 	{
@@ -104,8 +105,6 @@ const float Demo::f = 123.4567f;
 const float *pf = &Demo::f;
 const int Demo::* pi = &Demo::i;
 POut Demo::* pOut = &Demo::Out;
-
-
 
 //extern const int i;
 
@@ -204,7 +203,6 @@ int main(int argc, char** argv, char** envp) {
 	if(!(hThread=CreateThread(0, NULL, LPTHREAD_START_ROUTINE (ThdFun), __FUNCDNAME__, NULL, &dwThreadID)))
 		cerr<<"Create thread failed..."<<endl;
 	cout<<"Create thread sucessfully: "<<dwThreadID<<endl;
-	system("pause");
 	SetEvent(hEvt);
 	WaitForSingleObject(hThread,INFINITE);
 	
@@ -220,13 +218,13 @@ int main(int argc, char** argv, char** envp) {
 	srand(GetTickCount());
 	generate(ai.begin(), ai.end(), rand);
 	cout<<"Unordered array..."<<endl;
-	copy(ai.begin(), ai.end(),
-		ostream_iterator<int>(cout," "));
+	for_each(ai.begin(),ai.end(),[&](int i){cout<<i<<' ';});
 	sort(ai.begin(), ai.end());
 	cout<<"\nOrdered array..."<<endl;
-	copy(ai.begin(),ai.end(),ostream_iterator<int>(cout," "));
+	for_each(ai.begin(),ai.end(),[=](int i){cout<<i<<' ';});
 	cout<<endl;
-
+	system("pause");
+ 
 #ifdef Demo
    UINT count=1; UINT size=UINT(-1); cout<<2<<'\t';
    for(UINT i=3; i<size; i+=2)

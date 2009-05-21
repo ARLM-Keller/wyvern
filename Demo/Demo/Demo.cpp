@@ -142,7 +142,7 @@ void ThdFun(void* params)
 	cout<<"\nThread complete:"<<GetCurrentThreadId()<<endl;
 }
 
-void swapint(int& a, int& b)
+void swapint(int&& a, int&& b)
 {
 	int tmp=a; a=b; b=tmp;
 }
@@ -169,6 +169,10 @@ void MyQuickSort(int *array, int begin, int end)
 int mystrlen(const char * str)
 {
 	return *str==0?0:1+mystrlen(++str);
+}
+char* RvalueRef()
+{
+	return "Hello World!";
 }
 
 int main(int argc, char** argv, char** envp) {
@@ -223,6 +227,8 @@ int main(int argc, char** argv, char** envp) {
 	cout<<"\nOrdered array..."<<endl;
 	for_each(ai.begin(),ai.end(),[=](int i){cout<<i<<' ';});
 	cout<<endl;
+	char*&& world=RvalueRef();
+	cout<<world<<endl;
 	system("pause");
  
 #ifdef Demo

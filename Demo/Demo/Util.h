@@ -47,12 +47,14 @@ static int GetFileHash(const char* filename)
 bool isprime (unsigned int number)
 {
   /* no even number will be passed */
-  unsigned int div = 2;
+	if(number<2) return false;
 
-  while (div * div < number && number % div != 0)
-    div++;
+	unsigned int div = 2;
 
-  return number % div != 0;
+	while (div * div < number && number % div != 0)
+	div++;
+
+	return number % div != 0;
 }
 
 char * RemoveAt(	const char str[], UINT index)

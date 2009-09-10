@@ -38,16 +38,16 @@ public:
 	int receiver;
 
    /*__declspec(dllexport) */void Handler1(int nValue) {
-	   printf("CReceiver::Handler1 was called with value %d.\n", nValue);
+	   printf(__FUNCTION__": was called with value %d.\n", nValue);
    }
 
    void Handler2(int nValue) {
-      printf("CReceiver::Handler2 was called with value %d.\n", nValue);
+	   printf(__FUNCTION__": was called with value %d.\n", nValue);
    }
 
    void Handler3(int nValue)
    {
-	   printf("CReceiver::Handler3 was called with value %d.\n", nValue);
+	   printf(__FUNCTION__ ": was called with value %d.\n", nValue);
    }
 
    void hookEvent(CSource* pSource) {
@@ -69,15 +69,15 @@ public:
 
 	short target;
 
-	void Hand1(int nValue){ target = 1234;
-	      printf("CTarget::Hand1 was called with value %d.\n", nValue);
+	void Handler1(int nValue){ target = 1234;
+	printf(__FUNCTION__": was called with value %d.\n", target);
 	}
 
-	void Hand2(int nValue){ target = 4567;
-		      printf("CTarget::Hand2 was called with value %d.\n", nValue);
+	void Handler2(int nValue){ target = 4567;
+	printf(__FUNCTION__ ": was called with value %d.\n", target);
 	}
    static void SHandler(int nValue){
-			   printf("CTarget::SHandler was called with value %d.\n", nValue);
+	   printf(__FUNCTION__": was called with value %d.\n", nValue);
 	}
 		
 };
@@ -142,29 +142,29 @@ void ThdFun(void* params)
 	cout<<"\nThread complete:"<<GetCurrentThreadId()<<endl;
 }
 
-void swapint(int&& a, int&& b)
-{
-	int tmp=a; a=b; b=tmp;
-}
-void MyQuickSort(int *array, int begin, int end)
-{
-	if(begin>=end||begin<0) return;	
-	int l=begin, h=end;
-	int &pivot=array[(l+h)>>1];
-
-	while(l<h)
-	{
-		while (array[l]<pivot)l++;
-		while (pivot<array[h])h--;
-		if ( l<h )
-		{
-			swapint(array[l],array[h]);
-			l++;h--;
-		}
-	}
-	if(begin<h){MyQuickSort(array,begin,h);}
-	if(l<end){MyQuickSort(array,l==begin?l+1:l,end);}
-}
+//void swapint(int&& a, int&& b)
+//{
+//	int tmp=a; a=b; b=tmp;
+//}
+//void MyQuickSort(int *array, int begin, int end)
+//{
+//	if(begin>=end||begin<0) return;	
+//	int l=begin, h=end;
+//	int &pivot=array[(l+h)>>1];
+//
+//	while(l<h)
+//	{
+//		while (array[l]<pivot)l++;
+//		while (pivot<array[h])h--;
+//		if ( l<h )
+//		{
+//			swapint(array[l],array[h]);
+//			l++;h--;
+//		}
+//	}
+//	if(begin<h){MyQuickSort(array,begin,h);}
+//	if(l<end){MyQuickSort(array,l==begin?l+1:l,end);}
+//}
 
 int mystrlen(const char * str)
 {
@@ -188,9 +188,9 @@ int main(int argc, char** argv, char** envp) {
    source.MyEvent(147); //__noop
    receiver.hookEvent(&source);
    __raise source.MyEvent(123);
-   __hook(&CSource::MyEvent, &source, &CTarget::Hand1, p);
+   __hook(&CSource::MyEvent, &source, &CTarget::Handler1, p);
    receiver.unhookEvent(&source);
-   __hook(&CSource::MyEvent, &source, &CTarget::Hand2, &source);
+   __hook(&CSource::MyEvent, &source, &CTarget::Handler2, &source);
    __raise source.MyEvent(456);
    __hook(&CSource::SEvent, 0, &CTarget::SHandler, p);
    __raise CSource::SEvent(789);
@@ -204,9 +204,9 @@ int main(int argc, char** argv, char** envp) {
 	DWORD dwThreadID;
 	hEvt=CreateEvent(0,false,false,"Thread Event");
 	HANDLE hThread;
-	if(!(hThread=CreateThread(0, NULL, LPTHREAD_START_ROUTINE (ThdFun), __FUNCDNAME__, NULL, &dwThreadID)))
+	if(!(hThread=CreateThread(0, NULL, LPTHREAD_START_ROUTINE (ThdFun), __FUNCTION__, NULL, &dwThreadID)))
 		cerr<<"Create thread failed..."<<endl;
-	cout<<"Create thread sucessfully: "<<dwThreadID<<endl;
+	cout<<"Create thread successfully: "<<dwThreadID<<endl;
 	SetEvent(hEvt);
 	WaitForSingleObject(hThread,INFINITE);
 	
@@ -218,19 +218,17 @@ int main(int argc, char** argv, char** envp) {
 	StringFromCLSID(__uuidof(CSource), &idstr);
 	USES_CONVERSION;
 	cout<<OLE2CA(idstr)<<endl;
-	vector<int> ai(10);
+	/*vector<int> ai(10);
 	srand(GetTickCount());
 	generate(ai.begin(), ai.end(), rand);
-	cout<<"Unordered array..."<<endl;
-	for_each(ai.begin(),ai.end(),[&](int i){cout<<i<<' ';});
+	cout<<"Unordered array items..."<<endl;
+	for_each(ai.begin(),ai.end(),[](int i){cout<<i<<' ';});
 	sort(ai.begin(), ai.end());
-	cout<<"\nOrdered array..."<<endl;
-	for_each(ai.begin(),ai.end(),[=](int i){cout<<i<<' ';});
+	cout<<"\nOrdered array items..."<<endl;
+	for_each(ai.begin(),ai.end(),[](int i){cout<<i<<' ';});*/
 	cout<<endl;
-	char*&& world=RvalueRef();
-	cout<<world<<endl;
-	system("pause");
- 
+	//char*&& world=RvalueRef();
+	//cout<<world<<endl;
 #ifdef Demo
    UINT count=1; UINT size=UINT(-1); cout<<2<<'\t';
    for(UINT i=3; i<size; i+=2)

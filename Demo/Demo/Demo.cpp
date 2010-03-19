@@ -1,20 +1,16 @@
 // Demo.cpp : Defines the entry point for the console application.
 //
-
 // evh_native.cpp
-#include <stdio.h>
 #include <iostream>
-#include <ostream>
 #include <vector>
 #include <string>
 #include <algorithm>
-#include <windows.h>
 #include <atlconv.h>
 using namespace std;
-#include "Util.h"
-
+//#include "Util.h"
 //[event_source(native)]	
-struct __declspec(uuid("43d7ce4a-fbcf-454b-89de-1378b1a9d1d3")) CSource {
+struct __declspec(uuid("43d7ce4a-fbcf-454b-89de-1378b1a9d1d3")) CSource
+{
 public:
 	void __event MyEvent(int nValue);
 	static void __event SEvent(int nValue);
@@ -32,31 +28,32 @@ protected:
 };
 
 //[event_receiver(native)]
-class CReceiver {
+class CReceiver
+{
 public:
 
-	int receiver;
+	int r;
 
    /*__declspec(dllexport) */void Handler1(int nValue) {
-	   printf(__FUNCTION__": was called with value %d.\n", nValue);
+	   cout<<__FUNCTION__": was called with value "<<nValue<<endl;
    }
 
    void Handler2(int nValue) {
-	   printf(__FUNCTION__": was called with value %d.\n", nValue);
+	   cout<<__FUNCTION__": was called with value "<<nValue<<endl;
    }
 
    void Handler3(int nValue)
    {
-	   printf(__FUNCTION__ ": was called with value %d.\n", nValue);
+	   cout<<__FUNCTION__": was called with value "<<nValue<<endl;
    }
 
-   void hookEvent(CSource* pSource) {
-      __hook(&CSource::MyEvent, pSource, &CReceiver::Handler1);
+   void hook(CSource* pSource) {
+      __hook(&CSource::MyEvent, pSource, &CReceiver::Handler1, this);
       __hook(&CSource::MyEvent, pSource, &CReceiver::Handler2);
 	  __hook(&CSource::MyEvent, pSource, &CReceiver::Handler3);
    }
 
-   void unhookEvent(CSource* pSource) {
+   void unhook(CSource* pSource) {
       //__unhook(&CSource::MyEvent, pSource, &CReceiver::Handler1);
       __unhook(&CSource::MyEvent, pSource, &CReceiver::Handler2);
 	  //__unhook(&CSource::MyEvent, pSource, &CReceiver::Handler3);
@@ -70,16 +67,15 @@ public:
 	short target;
 
 	void Handler1(int nValue){ target = 1234;
-	printf(__FUNCTION__": was called with value %d.\n", target);
+	cout<<__FUNCTION__": was called with value "<<target<<endl;
 	}
 
 	void Handler2(int nValue){ target = 4567;
-	printf(__FUNCTION__ ": was called with value %d.\n", target);
+	cout<<__FUNCTION__": was called with value "<<target<<endl;
 	}
    static void SHandler(int nValue){
-	   printf(__FUNCTION__": was called with value %d.\n", nValue);
+	   cout<<__FUNCTION__": was called with value "<<nValue<<endl;
 	}
-		
 };
 
 class Demo
@@ -142,37 +138,9 @@ void ThdFun(void* params)
 	cout<<"\nThread complete:"<<GetCurrentThreadId()<<endl;
 }
 
-//void swapint(int&& a, int&& b)
-//{
-//	int tmp=a; a=b; b=tmp;
-//}
-//void MyQuickSort(int *array, int begin, int end)
-//{
-//	if(begin>=end||begin<0) return;	
-//	int l=begin, h=end;
-//	int &pivot=array[(l+h)>>1];
-//
-//	while(l<h)
-//	{
-//		while (array[l]<pivot)l++;
-//		while (pivot<array[h])h--;
-//		if ( l<h )
-//		{
-//			swapint(array[l],array[h]);
-//			l++;h--;
-//		}
-//	}
-//	if(begin<h){MyQuickSort(array,begin,h);}
-//	if(l<end){MyQuickSort(array,l==begin?l+1:l,end);}
-//}
-
 int mystrlen(const char * str)
 {
 	return *str==0?0:1+mystrlen(++str);
-}
-char* RvalueRef()
-{
-	return "Hello World!";
 }
 
 int main(int argc, char** argv, char** envp) {
@@ -180,17 +148,16 @@ int main(int argc, char** argv, char** envp) {
    DWORD time;
    cout<<"Demo begin..."<<endl;
    time = GetTickCount();
-
    CSource source;
    source.IP=123456789;
    CReceiver receiver;
    CTarget *p= (CTarget*)&receiver;
    source.MyEvent(147); //__noop
-   receiver.hookEvent(&source);
+   receiver.hook(&source);
    __raise source.MyEvent(123);
-   __hook(&CSource::MyEvent, &source, &CTarget::Handler1, p);
-   receiver.unhookEvent(&source);
-   __hook(&CSource::MyEvent, &source, &CTarget::Handler2, &source);
+   __hook(&CSource::MyEvent, &source, &CTarget::Handler1, p);//1234
+   receiver.unhook(&source);
+   __hook(&CSource::MyEvent, &source, &CTarget::Handler2, &source);//4567
    __raise source.MyEvent(456);
    __hook(&CSource::SEvent, 0, &CTarget::SHandler, p);
    __raise CSource::SEvent(789);
@@ -198,6 +165,7 @@ int main(int argc, char** argv, char** envp) {
    CSource::SEvent(369); //__noop
    //while(*envp) cout<<*envp++<<endl;
 #if 1
+
    cout<<"Size of static const member pointer is:"<< sizeof(pf)<<"\nSize of const member pointer is:"<<sizeof(pi)<<"\nSize of member function pointer is:"<<sizeof(pOut)<<endl;
 #endif
 
@@ -218,17 +186,16 @@ int main(int argc, char** argv, char** envp) {
 	StringFromCLSID(__uuidof(CSource), &idstr);
 	USES_CONVERSION;
 	cout<<OLE2CA(idstr)<<endl;
-	/*vector<int> ai(10);
+	vector<int> ai(10);
 	srand(GetTickCount());
 	generate(ai.begin(), ai.end(), rand);
 	cout<<"Unordered array items..."<<endl;
-	for_each(ai.begin(),ai.end(),[](int i){cout<<i<<' ';});
+	for_each(ai.begin(),ai.end(),[&](int i){cout<<i<<' ';});
 	sort(ai.begin(), ai.end());
 	cout<<"\nOrdered array items..."<<endl;
-	for_each(ai.begin(),ai.end(),[](int i){cout<<i<<' ';});*/
-	cout<<endl;
-	//char*&& world=RvalueRef();
-	//cout<<world<<endl;
+	for_each(ai.begin(),ai.end(),[=](int i){cout<<i<<' ';});
+	cin.get();
+	
 #ifdef Demo
    UINT count=1; UINT size=UINT(-1); cout<<2<<'\t';
    for(UINT i=3; i<size; i+=2)
